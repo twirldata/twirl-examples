@@ -1,0 +1,79 @@
+version: 2
+
+models:
+  - name: stg_ecommerce__events
+    description: Staging model for ecommerce events
+    config:
+      tags: 'ecommerce'
+    columns:
+      - name: event_id
+        description: Unique identifier for each event
+      - name: user_id
+        description: Identifier of the user who triggered the event
+      - name: product_id
+        description: Identifier of the product associated with the event
+      - name: event_type
+        description: Type of the event
+      - name: event_at
+        description: Timestamp when the event occurred
+
+
+  - name: stg_ecommerce__pageviews
+    description: Staging model for ecommerce pageviews
+    config:
+      tags: 'ecommerce'
+    columns:
+      - name: pageview_id
+        description: Unique identifier for each pageview
+      - name: user_id
+        description: Identifier of the user who viewed the page
+      - name: product_id
+        description: Identifier of the product viewed
+      - name: viewed_at
+        description: Timestamp when the page was viewed
+
+  - name: stg_ecommerce__products
+    description: Staging model for ecommerce products
+    config:
+      tags: 'ecommerce'
+    columns:
+      - name: product_id
+        description: Unique identifier for each product
+      - name: product_name
+        description: Name of the product
+      - name: category
+        description: Category of the product
+      - name: price
+        description: Price of the product
+
+  - name: stg_ecommerce__purchases
+    description: Staging model for ecommerce purchases
+    config:
+      tags: 'ecommerce'
+    columns:
+      - name: purchase_id
+        description: Unique identifier for each purchase
+      - name: user_id
+        description: Identifier of the user who made the purchase
+      - name: product_id
+        description: Identifier of the product purchased
+      - name: quantity
+        description: Quantity of the product purchased
+      - name: total_price
+        description: Total price of the purchase
+      - name: purchased_at
+        description: Timestamp when the purchase occurred
+
+  - name: stg_ecommerce__users
+    description: Staging model for ecommerce users
+    config:
+      tags: 'ecommerce'
+    columns:
+      - name: user_id
+        description: Identifier of the user
+      - name: name
+        description: Name of the user
+      - name: email
+        description: Email of the user
+      - name: registration_date
+        description: Timestamp when the user registered

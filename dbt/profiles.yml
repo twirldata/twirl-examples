@@ -1,0 +1,24 @@
+twirl-dbt-example-profile-bigquery:
+  target: dev
+  outputs:
+    # Note, both dev and prod are for BigQuery
+    dev:
+      dataset: "{{ env_var('TWIRL_DEV_SCHEMA', 'NO_ASSIGNED_DBT_USER') }}"
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: europe-west1
+      method: oauth
+      priority: interactive
+      project: twirldata-demo
+      threads: 1
+      type: bigquery
+    prod:
+      dataset: NO_ASSIGNED_DATASET
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: europe-west1
+      method: oauth
+      priority: interactive
+      project: twirldata-demo
+      threads: 1
+      type: bigquery

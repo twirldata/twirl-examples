@@ -1,0 +1,4 @@
+packages:
+  - git: https://github.com/twirldata/dbt-twirl.git
+    revision: dc4219ed874321caaca1cac5e23a2eb3c1b1910d
+sha1_hash: 97a243b6d9206d9eec5dd24e26d3c6f35dccf488

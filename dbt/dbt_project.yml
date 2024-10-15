@@ -1,0 +1,36 @@
+name: 'demo'
+
+config-version: 2
+version: '0.1'
+flags:
+  send_anonymous_usage_stats: False
+
+profile: 'twirl-dbt-example-profile-bigquery'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+    - "target"
+    - "dbt_modules"
+    - "logs"
+
+require-dbt-version: [">=1.0.0", "<2.0.0"]
+
+models:
+  demo:
+    +materialized: table
+    staging:
+      +schema: staging
+      +materialized: view
+    marts:
+      +materialized: table
+      ecommerce:
+        +schema: ecommerce
+    utilities:
+      +schema: utilities
+      +materialized: table

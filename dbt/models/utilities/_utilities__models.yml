@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: all_dates
+    config:
+      tags: 'utilities'
+      meta:
+        twirl:
+          trigger_condition:
+            type: static
+
+  - name: all_hours
+    config:
+      tags: 'utilities'
+      meta:
+        twirl:
+          trigger_condition:
+            type: static
