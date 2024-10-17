@@ -41,11 +41,11 @@ This example uses Github pull request data to make predictions about how quickly
 
 This example shows a realistic example of combining [dbt](https://www.getdbt.com/) modeling and Python based machine learning with [Prophet](https://facebook.github.io/prophet/) to forecast the performance of various ecommerce products based on the recent past. The example begins by pulling data from a postgres database, showing how to use Twirl state to do so easily.
 
-* Tag: `github_predictions`
+* Tag: `ecommerce`
 
 * Included assets:
 ```sh
-❯ twirl list @github_predictions
+❯ twirl list @ecommerce
     bigquery/raw_ecommerce/events
     bigquery/raw_ecommerce/pageviews
     bigquery/raw_ecommerce/products
@@ -84,7 +84,7 @@ This example leverages Python to process a series of contracts saved as PDF file
 * Included assets:
 
 ```sh
-❯ twirl list @github_predictions
+❯ twirl list @legal
     gcs/contracts
     bigquery/contracts/contract_text
     bigquery/contracts/gdpr_data
