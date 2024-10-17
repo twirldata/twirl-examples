@@ -11,7 +11,12 @@ twirl.project_config(
             name="bigquery",
             gcp_project_id="twirldata-demo",
             gcp_location="europe-west1",
-        )
+        ),
+        twirl.GcsDatastore(
+            name="gcs",
+            gcp_project_id="twirldata-demo",
+            gcs_bucket_name="twirldata-demo",
+        ),
     ],
     container_registry=twirl.GcpContainerRegistry(
         gcp_region="europe-west1",
