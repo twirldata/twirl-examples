@@ -31,6 +31,12 @@ twirl.project_config(
         job_manager_account="twirl-job-manager@twirldata-demo.iam.gserviceaccount.com",
         default_job_resource_config=twirl.CloudRunResourceConfig(memory="1Gi", cpu_count=1),
     ),
+    beam_runtime=twirl.GcpBeamRuntime(
+        project="twirldata-demo",
+        location="europe-west1",
+        bucket="twirldata-demo",
+        job_worker_account="twirl-runner@twirldata-demo.iam.gserviceaccount.com",
+    ),
     notify_on_failure=True,
     notify_on_success=False,
     dbt=twirl.DbtConfig(project_dir="dbt"),
