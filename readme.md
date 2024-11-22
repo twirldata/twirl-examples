@@ -77,7 +77,7 @@ This example shows a realistic example of combining [dbt](https://www.getdbt.com
 
 #### Document / PDF processing
 
-This example leverages Python to process a series of contracts saved as PDF files and scan them for any mention of GDPR along with page number for where those references occurred, showcasing how Twirl can be used in a legal tech setting.
+This example leverages Python and Dataflow to process a series of contracts saved as PDF files, generate embeddings for every page of the files and scan them for any mention of GDPR along with page number for where those references occurred, showcasing how Twirl can be used in a legal tech setting.
 
 * Tag: `legal`
 
@@ -87,6 +87,7 @@ This example leverages Python to process a series of contracts saved as PDF file
 ❯ twirl list @legal
     gcs/contracts
     bigquery/contracts/contract_text
+    bigquery/contracts/contract_embedding
     bigquery/contracts/gdpr_data
 ```
 
@@ -97,5 +98,6 @@ This example leverages Python to process a series of contracts saved as PDF file
 * Features demonstrated:
     - [Job specific requirements.txt](https://docs.twirldata.com/development/containers#requirements-file)
     - Combining BigQuery and GCS to process and structure non-tabular data
+    - Using Google Cloud Dataflow for tasks that require more distributed processing power
 
 Please explore the `bigquery`, `dbt`, and `gcs` directories to see example code. Feel free to also check out the `project_config.py`, detailing Twirl's configuration. Note how little is needed for the dbt integration!
