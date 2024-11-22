@@ -15,6 +15,9 @@ twirl.manifest(
             resource_config=twirl.CloudRunResourceConfig(cpu_count=1, memory="1Gi"),
         ),
         trigger_conditions=twirl.TriggerWhenAllInputsUpdated(at_most_every=timedelta(days=7)),
+        # This parameter enables webhook triggering of this update job
+        # See https://docs.twirldata.com/development/scheduling#event-based-trigger-conditions
+        trigger_on_event=True,
         freshness=twirl.Freshness(
             check_at="0 0 * * *",
             max_age=timedelta(days=8),
