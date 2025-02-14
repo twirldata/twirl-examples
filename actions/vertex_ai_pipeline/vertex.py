@@ -16,7 +16,6 @@ SERVICE_ACCOUNT = "twirl-runner@twirldata-demo.iam.gserviceaccount.com"
 # The service account above needs to have "Storage Object Creator" and "Storage Object Viewer" permissions on this bucket
 BUCKET_URI = "gs://twirldata-demo"
 
-KFP_ENDPOINT = "https://720c5bc00c3d6089-dot-us-central1.pipelines.googleusercontent.com/"
 PIPELINE_ROOT = f"{BUCKET_URI}/census_pipeline"  # This is where all pipeline artifacts are sent. You'll need to ensure the bucket is created ahead of time
 
 
