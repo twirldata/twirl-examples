@@ -2,22 +2,10 @@ import google.cloud.aiplatform as aiplatform
 import google.cloud.aiplatform_v1 as aiplatform_v1
 
 from kfp import compiler, dsl
-from kfp.dsl import Dataset, Input, Metrics, Model, Output, component
+from kfp.dsl import Artifact, Dataset, Input, Metrics, Model, Output, component
 
-# This code is built around a simple pipeline example from the Google VertexAI repo
-# See here: https://github.com/GoogleCloudPlatform/vertex-ai-samples
-
-PROJECT_ID = "twirldata-demo"
-LOCATION = "europe-north1"
-
-# Must have the following IAM roles: "BigQuery Data Editor", "BigQuery Job User", "Vertex AI User"
-SERVICE_ACCOUNT = "twirl-runner@twirldata-demo.iam.gserviceaccount.com"
-
-# The service account above needs to have "Storage Object Creator" and "Storage Object Viewer" permissions on this bucket
-BUCKET_URI = "gs://twirldata-demo"
-
-PIPELINE_ROOT = f"{BUCKET_URI}/census_pipeline"  # This is where all pipeline artifacts are sent. You'll need to ensure the bucket is created ahead of time
-
+# Adapted from https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/0cf6d0235ed09f891ebb70310a3ce35235032544/notebooks/official/pipelines/kfp2_pipeline.ipynb
+# See https://docs.twirldata.com/concepts/jobs#kubeflowjob-gcp for information on what permissions are required etc.
 
 @component(
     base_image="python:3.12",
@@ -217,6 +205,7 @@ def xgboost_training(
     os.makedirs(model.path, exist_ok=True)
     joblib.dump(xgb_model_best, os.path.join(model.path, "model.joblib"))
 
+PROJECT_ID = "twirldata-demo"
 
 @dsl.pipeline(
     name="census-demo-pipeline",
@@ -245,22 +234,3 @@ def pipeline():
     training_task = xgboost_training(
         dataset=export_dataset_task.outputs["dataset"],
     )
-
-
-aiplatform.init(project=PROJECT_ID, location=LOCATION, staging_bucket=BUCKET_URI)
-
-compiler.Compiler().compile(pipeline_func=pipeline, package_path="pipeline.yaml")
-
-job = aiplatform.PipelineJob(
-    display_name="census-demo-pipeline",
-    template_path="pipeline.yaml",
-    pipeline_root=PIPELINE_ROOT,
-)
-
-job.run(service_account=SERVICE_ACCOUNT)
-
-# Map the state of the pipeline to an exit code
-if job.state == aiplatform_v1.types.PipelineState.PIPELINE_STATE_SUCCEEDED:
-    exit(0)
-else:
-    exit(1)
