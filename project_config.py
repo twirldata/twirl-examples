@@ -37,6 +37,12 @@ twirl.project_config(
         bucket="twirldata-demo",
         job_worker_account="twirl-runner@twirldata-demo.iam.gserviceaccount.com",
     ),
+    kubeflow_runtime=twirl.VertexAiRuntime(
+        project="twirldata-demo",
+        location="europe-north1",
+        bucket="gs://twirldata-demo",
+        service_account="twirl-runner@twirldata-demo.iam.gserviceaccount.com",
+    ),
     notify_on_failure=True,
     notify_on_success=False,
     dbt=twirl.DbtConfig(project_dir="dbt"),
